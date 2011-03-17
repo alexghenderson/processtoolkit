@@ -24,6 +24,9 @@ namespace ProcessToolkit
             PROCESS_QUERY_INFORMATION = (0x0800)
         };
 
+        [DllImport("user32.dll")]
+        public static extern Boolean SetForegroundWindow(IntPtr hWnd);
+
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = false)]
         public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
 

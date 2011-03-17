@@ -200,6 +200,10 @@ namespace ProcessToolkit
                 throw new Exception("Failed to close process");
         }
 
+        public void BringToFront()
+        {
+            MemoryAPI.SetForegroundWindow(m_ReadProcess.MainWindowHandle);
+        }
         public void SendMessage(MessageType message, int wParam, int lword, int hword)
         {
             SendMessage(message, wParam, ((hword << 16) | (lword & 0xFFFF)));

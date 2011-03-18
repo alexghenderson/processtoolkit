@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Diagnostics;
 
 namespace ProcessToolkit
 {
-    public class ProcessToolkit
+    public class Process
     {
 
         public enum MessageType
@@ -127,8 +126,8 @@ namespace ProcessToolkit
         }
 
         private IntPtr m_hProcess = IntPtr.Zero;
-        private Process m_ReadProcess = null;
-        public Process ReadProcess
+        private System.Diagnostics.Process m_ReadProcess = null;
+        public System.Diagnostics.Process ReadProcess
         {
             get
             {
@@ -146,7 +145,7 @@ namespace ProcessToolkit
             get { return m_ReadProcess.MainModule.BaseAddress.ToInt32(); }
         }
 
-        public ProcessToolkit()
+        public Process()
         {
 
         }
@@ -159,7 +158,7 @@ namespace ProcessToolkit
                 throw new Exception("Failed to open process");
         }
 
-        public void OpenProcess(Process process)
+        public void OpenProcess(System.Diagnostics.Process process)
         {
             m_ReadProcess = process;
             Open();
@@ -167,7 +166,7 @@ namespace ProcessToolkit
 
         public void OpenProcessByName(string processName, int index = 0)
         {
-            Process[] processes = Process.GetProcessesByName(processName);
+            System.Diagnostics.Process[] processes = System.Diagnostics.Process.GetProcessesByName(processName);
             if (processes.Length > index)
             {
                 m_ReadProcess = processes[index];
@@ -181,7 +180,7 @@ namespace ProcessToolkit
 
         public void OpenProcessById(int processId)
         {
-            Process process = Process.GetProcessById(processId);
+            System.Diagnostics.Process process = System.Diagnostics.Process.GetProcessById(processId);
             if (process != null)
             {
                 m_ReadProcess = process;
